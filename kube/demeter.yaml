@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demeter
+  name: demeter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demeter
+  template:
+    metadata:
+      labels:
+        app: demeter
+    spec:
+      containers:
+        - image: mszg/demeter:v0.5.0
+          name: demeter
+---

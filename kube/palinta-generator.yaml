@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: palinta-generator
+  name: palinta-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: palinta-generator
+  template:
+    metadata:
+      labels:
+        app: palinta-generator
+    spec:
+      containers:
+        - image: mszg/palinta-generator:v0.5.0
+          name: palinta-generator
+---

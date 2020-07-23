@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-creds
+type: Opaque
+data:
+  GF_SECURITY_ADMIN_USER: YWRtaW4K
+  GF_SECURITY_ADMIN_PASSWORD: YWRtaW4K
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: grafana
+  name: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      volumes:
+        - configMap:
+            name: grafana-config
+          name: grafana-config
+      containers:
+        - image: grafana/grafana:7.1.0
+          name: grafana
+          ports:
+            - containerPort: 3000
+              name: grafana
+          volumeMounts:
+            - mountPath: /etc/grafana/provisioning/datasources/data_source.yml
+              name: grafana-config
+              readOnly: true
+              subPath: data_source.yml
+            - mountPath: /etc/grafana/provisioning/dashboards/dashboard.yaml
+              name: grafana-config
+              readOnly: true
+              subPath: provider.yaml
+            - mountPath: /etc/grafana/provisioning/dashboards/palinta.json
+              name: grafana-config
+              readOnly: true
+              subPath: dashboard.json
+          # envFrom:
+          #   - secretRef:
+          #       name: grafana-creds
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+    project: palinta
+spec:
+  type: LoadBalancer
+  selector:
+      app: grafana
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+---

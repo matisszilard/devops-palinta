@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: influxdb-creds
+type: Opaque
+data:
+  INFLUXDB_DATABASE: cGFsaW50YQo=
+  INFLUXDB_USERNAME: cm9vdAo=
+  INFLUXDB_PASSWORD: cm9vdAo=
+  INFLUXDB_HOST: aW5mbHV4ZGIK
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: influxdb
+  name: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+        - image: influxdb:1.6.4
+          name: influxdb
+          ports:
+            - containerPort: 8086
+              name: influxdb
+          envFrom:
+            - secretRef:
+                name: influxdb-creds
+          volumeMounts:
+            - mountPath: /var/lib/influxdb
+              name: var-lib-influxdb
+      volumes:
+        - name: var-lib-influxdb
+          persistentVolumeClaim:
+            claimName: influxdb
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb
+  labels:
+    app: influxdb
+    project: palinta
+spec:
+  type: ClusterIP
+  selector:
+      app: influxdb
+  ports:
+    - port: 8086
+      targetPort: 8086
+      protocol: TCP
+---
