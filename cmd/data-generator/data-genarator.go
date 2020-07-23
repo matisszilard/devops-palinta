@@ -8,9 +8,9 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	model "github.com/matisszilard/devops-palinta/palinta/pkg/model"
-	mqtt "github.com/matisszilard/devops-palinta/palinta/pkg/mqtt"
-	util "github.com/matisszilard/devops-palinta/palinta/pkg/util"
+	model "github.com/matisszilard/devops-palinta/pkg/model"
+	mqtt "github.com/matisszilard/devops-palinta/pkg/mqtt"
+	util "github.com/matisszilard/devops-palinta/pkg/util"
 )
 
 var mqttChannel chan string

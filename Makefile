@@ -21,16 +21,16 @@ clean:
 	rm -rf build
 
 xbuild: clean build
-	cd palinta/cmd/data-generator; GOOS=linux   GOARCH=amd64 go build -o ../../../build/linux-amd64/data-generator; cd ../../..
-	cd palinta/cmd/data-generator; GOOS=darwin  GOARCH=amd64 go build -o ../../../build/macos-amd64/data-generator; cd ../../..
-	cd palinta/cmd/demeter;   GOOS=linux   GOARCH=amd64 go build -o ../../../build/linux-amd64/demeter; cd ../../..
-	cd palinta/cmd/demeter;   GOOS=darwin  GOARCH=amd64 go build -o ../../../build/macos-amd64/demeter; cd ../../..
+	cd cmd/data-generator; GOOS=linux   GOARCH=amd64 go build -o ../../build/linux-amd64/data-generator; cd ../..
+	cd cmd/data-generator; GOOS=darwin  GOARCH=amd64 go build -o ../../build/macos-amd64/data-generator; cd ../..
+	cd cmd/demeter;   GOOS=linux   GOARCH=amd64 go build -o ../../build/linux-amd64/demeter; cd ../..
+	cd cmd/demeter;   GOOS=darwin  GOARCH=amd64 go build -o ../../build/macos-amd64/demeter; cd ../..
 
 docker-demeter:
-	docker build -t demeter  -f ./palinta/Dockerfile.demeter .
+	docker build -t demeter  -f ./Dockerfile.demeter .
 
 docker-generator:
-	docker build -t data-generator  -f ./palinta/Dockerfile.generator .
+	docker build -t data-generator  -f ./Dockerfile.generator .
 
 docker-build: docker-demeter docker-generator
 

@@ -8,10 +8,10 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/matisszilard/devops-palinta/palinta/pkg/model"
-	"github.com/matisszilard/devops-palinta/palinta/pkg/mqtt"
-	"github.com/matisszilard/devops-palinta/palinta/pkg/store"
-	"github.com/matisszilard/devops-palinta/palinta/pkg/store/influxdb"
+	"github.com/matisszilard/devops-palinta/pkg/model"
+	"github.com/matisszilard/devops-palinta/pkg/mqtt"
+	"github.com/matisszilard/devops-palinta/pkg/store"
+	"github.com/matisszilard/devops-palinta/pkg/store/influxdb"
 )
 
 var dbStore store.Store
@@ -49,6 +49,7 @@ func main() {
 			{
 				saveTemperature(payload)
 			}
+		}
 	}
 }
 

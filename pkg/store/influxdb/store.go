@@ -3,7 +3,7 @@ package influxdb
 import (
 	log "github.com/sirupsen/logrus"
 
-	"github.com/matisszilard/devops-palinta/palinta/pkg/store"
+	"github.com/matisszilard/devops-palinta/pkg/store"
 
 	"github.com/influxdata/influxdb/client/v2"
 )

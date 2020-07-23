@@ -4,7 +4,7 @@ import (
 	"os"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
-	util "github.com/matisszilard/devops-palinta/palinta/pkg/util"
+	util "github.com/matisszilard/devops-palinta/pkg/util"
 	log "github.com/sirupsen/logrus"
 )
 
