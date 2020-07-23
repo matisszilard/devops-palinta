@@ -1,4 +1,4 @@
-module github.com/matisszilard/k8s-palinta/palinta
+module github.com/matisszilard/devops-palinta/palinta
 
 go 1.13
 

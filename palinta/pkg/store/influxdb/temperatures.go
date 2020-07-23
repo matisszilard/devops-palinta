@@ -6,7 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	client "github.com/influxdata/influxdb/client/v2"
-	"github.com/matisszilard/k8s-palinta/palinta/pkg/model"
+	"github.com/matisszilard/devops-palinta/palinta/pkg/model"
 )
 
 type influxdbTemperatureStore struct {

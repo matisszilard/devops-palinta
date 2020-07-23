@@ -8,10 +8,10 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/matisszilard/k8s-palinta/palinta/pkg/model"
-	"github.com/matisszilard/k8s-palinta/palinta/pkg/mqtt"
-	"github.com/matisszilard/k8s-palinta/palinta/pkg/store"
-	"github.com/matisszilard/k8s-palinta/palinta/pkg/store/influxdb"
+	"github.com/matisszilard/devops-palinta/palinta/pkg/model"
+	"github.com/matisszilard/devops-palinta/palinta/pkg/mqtt"
+	"github.com/matisszilard/devops-palinta/palinta/pkg/store"
+	"github.com/matisszilard/devops-palinta/palinta/pkg/store/influxdb"
 )
 
 var dbStore store.Store
@@ -39,13 +39,6 @@ func main() {
 		}).Error("Unable to subscribe for tokens")
 		os.Exit(1)
 	}
-	err = mqtt.Subscribe(client, model.MqttExitToken)
-	if err != nil {
-		log.WithFields(log.Fields{
-			"error": err,
-		}).Error("Unable to subscribe for tokens")
-		os.Exit(1)
-	}
 
 	for {
 		topic := <-mqttChannel
@@ -56,11 +49,6 @@ func main() {
 			{
 				saveTemperature(payload)
 			}
-		case model.MqttExitToken:
-			{
-				os.Exit(0)
-			}
-		}
 	}
 }
 

@@ -6,7 +6,6 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  # - host: palinta.k8s.codespring.ro
   - host: palinta.apps.okd.codespring.ro
     http:
       paths:
