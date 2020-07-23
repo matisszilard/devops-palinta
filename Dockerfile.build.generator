@@ -1,0 +1,7 @@
+FROM golang:1.14.6
+
+ADD . /workspace/
+
+RUN cd /workspace && make xbuild
+
+CMD ["/workspace/build/linux-amd64/data-generator"]
