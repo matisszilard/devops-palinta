@@ -29,12 +29,11 @@ metadata:
     app: mosquitto
     project: mosquitto
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
       app: mosquitto
   ports:
     - port: 1883
       targetPort: 1883
-      nodePort: 31234
       protocol: TCP
 ---

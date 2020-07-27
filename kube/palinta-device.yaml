@@ -11,6 +11,8 @@ spec:
       app: palinta-device
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
       labels:
         app: palinta-device
     spec:
@@ -29,7 +31,7 @@ metadata:
     app: palinta-device
     project: palinta
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
       app: palinta-device
   ports:

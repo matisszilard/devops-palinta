@@ -36,7 +36,13 @@ spec:
           volumeMounts:
             - mountPath: /prometheus
               name: var-lib-prometheus
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/prometheus.yml
+              subPath: prometheus.yml
       volumes:
+        - name: prometheus-config-volume
+          configMap:
+            name: prometheus-config
         - name: var-lib-prometheus
           persistentVolumeClaim:
             claimName: prometheus
@@ -49,7 +55,8 @@ metadata:
     app: prometheus
     project: palinta
 spec:
-  type: ClusterIP
+  # type: ClusterIP
+  type: NodePort
   selector:
     app: prometheus
   ports:
@@ -57,4 +64,26 @@ spec:
       targetPort: 9090
       protocol: TCP
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  # namespace: monitoring
+data:
+  prometheus.yml: |
 
+    global:
+      scrape_interval:     15s
+      external_labels:
+        monitor: 'eks-dev-monitor'
+
+    scrape_configs:
+
+      - job_name: 'prometheus'
+        scrape_interval: 5s
+        static_configs:
+          - targets: ['localhost:9090']
+
+      - job_name: 'palinta-device'
+        static_configs:
+          - targets: ['palinta-device:8080']
