@@ -342,54 +342,54 @@ data:
   prometheus.json: |
     {
         "annotations": {
-            "list": [
+        "list": [
             {
-                "builtIn": 1,
-                "datasource": "-- Grafana --",
-                "enable": true,
-                "hide": true,
-                "iconColor": "rgba(0, 211, 255, 1)",
-                "name": "Annotations & Alerts",
-                "type": "dashboard"
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
             }
-            ]
+        ]
         },
         "editable": true,
         "gnetId": null,
         "graphTooltip": 0,
-        "id": 2,
+        "id": 3,
         "links": [],
         "panels": [
-            {
+        {
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
             "datasource": "Prometheus",
             "fieldConfig": {
-                "defaults": {
+            "defaults": {
                 "custom": {}
-                },
-                "overrides": []
+            },
+            "overrides": []
             },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
-                "h": 9,
-                "w": 8,
-                "x": 0,
-                "y": 0
+            "h": 9,
+            "w": 8,
+            "x": 0,
+            "y": 0
             },
             "hiddenSeries": false,
             "id": 2,
             "legend": {
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "show": true,
-                "total": false,
-                "values": false
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
             },
             "lines": true,
             "linewidth": 1,
@@ -404,12 +404,12 @@ data:
             "stack": false,
             "steppedLine": false,
             "targets": [
-                {
+            {
                 "expr": "up",
                 "interval": "",
                 "legendFormat": "",
                 "refId": "A"
-                }
+            }
             ],
             "thresholds": [],
             "timeFrom": null,
@@ -417,71 +417,71 @@ data:
             "timeShift": null,
             "title": "Service uptime",
             "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
             },
             "type": "graph",
             "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
             },
             "yaxes": [
-                {
+            {
                 "format": "short",
                 "label": null,
                 "logBase": 1,
                 "max": null,
                 "min": null,
                 "show": true
-                },
-                {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-                }
-            ],
-            "yaxis": {
-                "align": false,
-                "alignLevel": null
-            }
             },
             {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+            }
+            ],
+            "yaxis": {
+            "align": false,
+            "alignLevel": null
+            }
+        },
+        {
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
             "datasource": "Prometheus",
             "fieldConfig": {
-                "defaults": {
+            "defaults": {
                 "custom": {}
-                },
-                "overrides": []
+            },
+            "overrides": []
             },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
-                "h": 9,
-                "w": 8,
-                "x": 8,
-                "y": 0
+            "h": 9,
+            "w": 8,
+            "x": 8,
+            "y": 0
             },
             "hiddenSeries": false,
             "id": 4,
             "legend": {
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "show": true,
-                "total": false,
-                "values": false
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
             },
             "lines": true,
             "linewidth": 1,
@@ -496,121 +496,305 @@ data:
             "stack": false,
             "steppedLine": false,
             "targets": [
-                {
-                "expr": "my_group_string_service_request_count",
+            {
+                "expr": "palinta_device_service_request_count",
                 "interval": "",
                 "legendFormat": "",
                 "refId": "A"
-                }
+            }
             ],
             "thresholds": [],
             "timeFrom": null,
             "timeRegions": [],
             "timeShift": null,
-            "title": "Service request count",
+            "title": "palinta_device_service_request_count",
             "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
             },
             "type": "graph",
             "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
             },
             "yaxes": [
-                {
+            {
                 "format": "short",
                 "label": null,
                 "logBase": 1,
                 "max": null,
                 "min": null,
                 "show": true
-                },
-                {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-                }
-            ],
-            "yaxis": {
-                "align": false,
-                "alignLevel": null
-            }
             },
             {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+            }
+            ],
+            "yaxis": {
+            "align": false,
+            "alignLevel": null
+            }
+        },
+        {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
             "datasource": "Prometheus",
             "fieldConfig": {
-                "defaults": {
-                "custom": {},
-                "mappings": [],
-                "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                    {
-                        "color": "green",
-                        "value": null
-                    },
-                    {
-                        "color": "red",
-                        "value": 80
-                    }
-                    ]
-                }
-                },
-                "overrides": []
+            "defaults": {
+                "custom": {}
             },
+            "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
             "gridPos": {
-                "h": 9,
-                "w": 8,
-                "x": 16,
-                "y": 0
+            "h": 9,
+            "w": 8,
+            "x": 16,
+            "y": 0
             },
-            "id": 6,
-            "options": {
-                "reduceOptions": {
-                "calcs": [
-                    "mean"
-                ],
-                "fields": "",
-                "values": false
-                },
-                "showThresholdLabels": false,
-                "showThresholdMarkers": true
+            "hiddenSeries": false,
+            "id": 8,
+            "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
             },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "percentage": false,
             "pluginVersion": "7.1.0",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
             "targets": [
-                {
-                "expr": "my_group_string_service_request_latency_microseconds_count",
+            {
+                "expr": "palinta_device_service_request_latency_microseconds_sum",
                 "interval": "",
                 "legendFormat": "",
                 "refId": "A"
+            }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "palinta_device_service_request_latency_microseconds_sum",
+            "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+            },
+            "yaxes": [
+            {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+            },
+            {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+            }
+            ],
+            "yaxis": {
+            "align": false,
+            "alignLevel": null
+            }
+        },
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+            "defaults": {
+                "custom": {},
+                "mappings": [],
+                "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                    {
+                    "color": "green",
+                    "value": null
+                    },
+                    {
+                    "color": "red",
+                    "value": 80
+                    }
+                ]
                 }
+            },
+            "overrides": []
+            },
+            "gridPos": {
+            "h": 9,
+            "w": 8,
+            "x": 0,
+            "y": 9
+            },
+            "id": 6,
+            "options": {
+            "reduceOptions": {
+                "calcs": [
+                "mean"
+                ],
+                "fields": "",
+                "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
+            },
+            "pluginVersion": "7.1.0",
+            "targets": [
+            {
+                "expr": "palinta_device_service_request_latency_microseconds_count",
+                "interval": "",
+                "legendFormat": "",
+                "refId": "A"
+            }
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Panel TitleRequest latency microsecond count",
+            "title": "palinta_device_service_request_latency_microseconds_count",
             "type": "gauge"
+        },
+        {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "Prometheus",
+            "fieldConfig": {
+            "defaults": {
+                "custom": {}
+            },
+            "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+            "h": 9,
+            "w": 16,
+            "x": 8,
+            "y": 9
+            },
+            "hiddenSeries": false,
+            "id": 10,
+            "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "percentage": false,
+            "pluginVersion": "7.1.0",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+            {
+                "expr": "go_memstats_alloc_bytes",
+                "interval": "",
+                "legendFormat": "",
+                "refId": "A"
             }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "go_memstats_alloc_bytes",
+            "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+            },
+            "yaxes": [
+            {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+            },
+            {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+            }
+            ],
+            "yaxis": {
+            "align": false,
+            "alignLevel": null
+            }
+        }
         ],
         "schemaVersion": 26,
         "style": "dark",
         "tags": [],
         "templating": {
-            "list": []
+        "list": []
         },
         "time": {
-            "from": "now-1h",
-            "to": "now"
+        "from": "now-1h",
+        "to": "now"
         },
         "timepicker": {
-            "refresh_intervals": [
+        "refresh_intervals": [
             "10s",
             "30s",
             "1m",
@@ -620,10 +804,10 @@ data:
             "1h",
             "2h",
             "1d"
-            ]
+        ]
         },
         "timezone": "",
-        "title": "Prometheus",
-        "uid": "SBk8FO4Gz",
-        "version": 5
+        "title": "Prometheus - default",
+        "uid": "XJwruOVMk",
+        "version": 3
     }

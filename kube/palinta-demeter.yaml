@@ -15,6 +15,7 @@ spec:
         app: demeter
     spec:
       containers:
-        - image: mszg/demeter:v0.5.0
+        - image: mszg/palinta-demeter:v0.2.0
           name: demeter
+          imagePullPolicy: Always
 ---

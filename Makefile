@@ -52,7 +52,7 @@ xbuild: clean build-demeter docker-generator docker-device
 docker-demeter: build-demeter
 	docker build --build-arg target=demeter -t demeter -f ./Dockerfile .
 
-docker-generator: build-generator
+docker-generator: build-data-generator
 	docker build --build-arg target=data-generator -t data-generator -f ./Dockerfile .
 
 docker-device: build-device

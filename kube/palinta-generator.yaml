@@ -15,6 +15,7 @@ spec:
         app: palinta-generator
     spec:
       containers:
-        - image: mszg/palinta-generator:v0.5.0
+        - image: mszg/palinta-generator:v0.2.0
           name: palinta-generator
+          imagePullPolicy: Always
 ---

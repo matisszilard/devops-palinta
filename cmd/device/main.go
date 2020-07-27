@@ -16,20 +16,20 @@ import (
 func main() {
 	fieldKeys := []string{"method", "error"}
 	requestCount := kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{
-		Namespace: "my_group",
-		Subsystem: "string_service",
+		Namespace: "palinta",
+		Subsystem: "device_service",
 		Name:      "request_count",
 		Help:      "Number of requests received.",
 	}, fieldKeys)
 	requestLatency := kitprometheus.NewSummaryFrom(stdprometheus.SummaryOpts{
-		Namespace: "my_group",
-		Subsystem: "string_service",
+		Namespace: "palinta",
+		Subsystem: "device_service",
 		Name:      "request_latency_microseconds",
 		Help:      "Total duration of requests in microseconds.",
 	}, fieldKeys)
 	countResult := kitprometheus.NewSummaryFrom(stdprometheus.SummaryOpts{
-		Namespace: "my_group",
-		Subsystem: "string_service",
+		Namespace: "palinta",
+		Subsystem: "device_service",
 		Name:      "count_result",
 		Help:      "The result of each count method.",
 	}, []string{}) // no fields here
@@ -38,7 +38,7 @@ func main() {
 
 	var svc device.StringService
 	svc = device.New(logger)
-	svc = device.InstrumentingMiddleware{requestCount, requestLatency, countResult, svc}
+	svc = device.NewInstrumentingMiddleware(requestCount, requestLatency, countResult, svc)
 
 	uppercaseHandler := httptransport.NewServer(
 		device.MakeUppercaseEndpoint(svc),
@@ -46,8 +46,15 @@ func main() {
 		device.EncodeResponse,
 	)
 
+	getDevicesHandler := httptransport.NewServer(
+		device.MakeGetDevicesEndpoint(svc),
+		device.DecodeGetDevicesRequest,
+		device.EncodeResponse,
+	)
+
 	// Setup routing
-	http.Handle("/uppercase", uppercaseHandler)
+	http.Handle("/api/v1/uppercase", uppercaseHandler)
+	http.Handle("/api/v1/devices", getDevicesHandler)
 	http.Handle("/metrics", promhttp.Handler())
 
 	logger.Log("msg", "HTTP", "addr", ":8080")

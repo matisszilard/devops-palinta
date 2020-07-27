@@ -39,6 +39,6 @@ func main() {
 			"data": s,
 		}).Info("Send data to client")
 
-		time.Sleep(2 * time.Second)
+		time.Sleep(120 * time.Second)
 	}
 }

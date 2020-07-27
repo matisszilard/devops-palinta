@@ -17,7 +17,7 @@ spec:
         app: palinta-device
     spec:
       containers:
-        - image: mszg/palinta-device:v0.1.0
+        - image: mszg/palinta-device:v0.4.0
           name: palinta-device
           ports:
             - containerPort: 8080

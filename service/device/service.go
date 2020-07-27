@@ -2,6 +2,7 @@ package device
 
 import (
 	"github.com/go-kit/kit/log"
+	"github.com/matisszilard/devops-palinta/pkg/model"
 
 	"errors"
 	"strings"
@@ -10,6 +11,7 @@ import (
 // StringService provides operations on strings.
 type StringService interface {
 	Uppercase(string) (string, error)
+	GetDevices() ([]model.Device, error)
 }
 
 type stringService struct{}
@@ -18,7 +20,7 @@ type stringService struct{}
 func New(logger log.Logger) StringService {
 	var svc StringService
 	svc = stringService{}
-	svc = LoggingMiddleware{logger, svc}
+	svc = loggingMiddleware{logger, svc}
 	return svc
 }
 
@@ -27,6 +29,11 @@ func (stringService) Uppercase(s string) (string, error) {
 		return "", ErrEmpty
 	}
 	return strings.ToUpper(s), nil
+}
+
+func (stringService) GetDevices() ([]model.Device, error) {
+	// Return hardcoded values
+	return []model.Device{{Name: "Aragorn"}, {Name: "Legolas"}, {Name: "Gimli"}}, nil
 }
 
 // ErrEmpty is returned when input string is empty
