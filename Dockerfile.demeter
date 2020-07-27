@@ -1,5 +1,0 @@
-FROM ubuntu:20.04
-
-ADD ./build/linux-amd64/demeter /demeter
-
-CMD ["/demeter"]
