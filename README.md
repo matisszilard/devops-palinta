@@ -1,4 +1,4 @@
-# Palinta devops playground
+# Palinta devops playground [![Build Status](https://travis-ci.com/matisszilard/devops-palinta.svg?branch=master)](https://travis-ci.com/github/matisszilard/devops-palinta)
 
 Playground project for Kubernetes, Openshift, AWS, etc.
 
