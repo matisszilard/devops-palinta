@@ -7,11 +7,11 @@ go:
 services:
     - docker
 
-jobs:
-    include:
-        - stage: build
-        script: make build-device
-        - stage: deploy
-        script:
-            - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-            - make make docker
+script:
+    - make build-device
+
+deploy:
+    provider: script
+    script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - make make docker
