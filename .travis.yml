@@ -1,8 +1,17 @@
 language: go
 
 go:
-  - 1.13
-  - tip
+    - 1.13
+    - tip
 
-script:
-  - make build-device
+services:
+    - docker
+
+jobs:
+    include:
+        - stage: build
+        script: make build-device
+        - stage: deploy
+        script:
+            - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            - make make docker
