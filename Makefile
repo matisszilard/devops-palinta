@@ -49,7 +49,7 @@ build-user:
 	cd cmd/user;   GOOS=linux   GOARCH=amd64 go build -o ../../build/linux-amd64/user; cd ../..
 	cd cmd/user;   GOOS=darwin  GOARCH=amd64 go build -o ../../build/macos-amd64/user; cd ../..
 
-xbuild: clean build-demeter build-generator build-device build-user
+xbuild: clean build-demeter build-data-generator build-device build-user
 
 # Build rules for building socker images
 

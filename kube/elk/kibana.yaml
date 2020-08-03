@@ -67,7 +67,7 @@ spec:
       http:
         paths:
         - path: /
-        backend:
+          backend:
             serviceName: kibana
             servicePort: 5601
 ---
