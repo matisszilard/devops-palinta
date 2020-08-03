@@ -25,9 +25,13 @@ spec:
   - host: palinta-api.apps.okd.codespring.ro
     http:
       paths:
-      - path: /
+      - path: /api/v1/devices
         backend:
           serviceName: palinta-device
+          servicePort: 8080
+      - path: /api/v1/users
+        backend:
+          serviceName: palinta-user
           servicePort: 8080
 ---
 apiVersion: extensions/v1beta1

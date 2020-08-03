@@ -2,15 +2,17 @@ package main
 
 import (
 	"net/http"
-	"os"
-
-	"github.com/go-kit/kit/log"
 
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
 	httptransport "github.com/go-kit/kit/transport/http"
 	"github.com/matisszilard/devops-palinta/service/device"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+
+	"github.com/sirupsen/logrus"
+
+	"github.com/olivere/elastic/v7"
+	"gopkg.in/sohlich/elogrus.v7"
 )
 
 func main() {
@@ -34,10 +36,22 @@ func main() {
 		Help:      "The result of each count method.",
 	}, []string{}) // no fields here
 
-	logger := log.NewLogfmtLogger(os.Stderr)
+	log := logrus.New()
+
+	// Elastic logger
+	client, err := elastic.NewClient(elastic.SetURL("http://okd-5mthh-worker-tb667.apps.okd.codespring.ro:30029"), elastic.SetSniff(false))
+	if err != nil {
+		log.Panic(err)
+	}
+
+	hook, err := elogrus.NewAsyncElasticHook(client, "http://okd-5mthh-worker-tb667.apps.okd.codespring.ro:30029", logrus.DebugLevel, "palinta-device")
+	if err != nil {
+		log.Panic(err)
+	}
+	log.Hooks.Add(hook)
 
 	var svc device.StringService
-	svc = device.New(logger)
+	svc = device.New(log)
 	svc = device.NewInstrumentingMiddleware(requestCount, requestLatency, countResult, svc)
 
 	uppercaseHandler := httptransport.NewServer(
@@ -53,10 +67,15 @@ func main() {
 	)
 
 	// Setup routing
-	http.Handle("/api/v1/uppercase", uppercaseHandler)
+	http.Handle("/api/v1/devices/uppercase", uppercaseHandler)
 	http.Handle("/api/v1/devices", getDevicesHandler)
-	http.Handle("/metrics", promhttp.Handler())
+	http.Handle("/api/v1/devices/metrics", promhttp.Handler())
 
-	logger.Log("msg", "HTTP", "addr", ":8080")
-	logger.Log("err", http.ListenAndServe(":8080", nil))
+	log.WithFields(logrus.Fields{
+		"method":   "main",
+		"protocol": "HTTP",
+		"port":     "8080",
+	}).Info("Starting palinta device service...")
+
+	log.Info(http.ListenAndServe(":8080", nil))
 }

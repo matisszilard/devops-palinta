@@ -72,7 +72,17 @@ data:
       - job_name: 'palinta-device'
         static_configs:
           - targets: ['palinta-device:8080']
+        metrics_path: '/api/v1/devices/metrics'
+
+      - job_name: 'palinta-user'
+        static_configs:
+          - targets: ['palinta-user:8080']
+        metrics_path: '/api/v1/users/metrics'
 
       - job_name: 'influxdb'
         static_configs:
           - targets: ['influxdb:8086']
+
+      - job_name: 'grafana'
+        static_configs:
+          - targets: ['grafana:80']

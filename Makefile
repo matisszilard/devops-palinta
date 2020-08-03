@@ -45,7 +45,11 @@ build-device:
 	cd cmd/device;   GOOS=linux   GOARCH=amd64 go build -o ../../build/linux-amd64/device; cd ../..
 	cd cmd/device;   GOOS=darwin  GOARCH=amd64 go build -o ../../build/macos-amd64/device; cd ../..
 
-xbuild: clean build-demeter docker-generator docker-device
+build-user:
+	cd cmd/user;   GOOS=linux   GOARCH=amd64 go build -o ../../build/linux-amd64/user; cd ../..
+	cd cmd/user;   GOOS=darwin  GOARCH=amd64 go build -o ../../build/macos-amd64/user; cd ../..
+
+xbuild: clean build-demeter build-generator build-device build-user
 
 # Build rules for building socker images
 
@@ -58,7 +62,10 @@ docker-generator: build-data-generator
 docker-device: build-device
 	docker build --build-arg target=device -t device -f ./Dockerfile .
 
-docker-build: docker-demeter docker-generator docker-device
+docker-user: build-user
+	docker build --build-arg target=user -t user -f ./Dockerfile .
+
+docker-build: docker-demeter docker-generator docker-device docker-user
 
 # Push Palinta images
 
@@ -68,10 +75,18 @@ docker-push-device: clean docker-device
 	docker push mszg/palinta-device:${tag}
 
 tag ?= latest
+docker-push-user: clean docker-user
+	docker tag user mszg/palinta-user:${tag}
+	docker push mszg/palinta-user:${tag}
+
+tag ?= latest
 docker-push: xbuild docker-build
 	docker tag demeter mszg/palinta-demeter:${tag}
-	docker tag data-generator mszg/palinta-generator:${tag}
-	docker tag device mszg/palinta-device:${tag}
 	docker push mszg/palinta-demeter:${tag}
+	docker tag data-generator mszg/palinta-generator:${tag}
 	docker push mszg/palinta-generator:${tag}
+	docker tag device mszg/palinta-device:${tag}
 	docker push mszg/palinta-device:${tag}
+	docker push mszg/palinta-generator:${tag}
+	docker tag user mszg/palinta-user:${tag}
+	docker push mszg/palinta-user:${tag}

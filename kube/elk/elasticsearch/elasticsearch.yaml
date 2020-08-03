@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: elasticsearch
+  name: elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+        - image: elasticsearch:7.8.1
+          name: elasticsearch
+          ports:
+            - containerPort: 9200
+              name: elasticsearch
+          env:
+            - name: discovery.type
+              value: single-node
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch
+  labels:
+    app: elasticsearch
+    project: palinta
+spec:
+  type: NodePort
+  selector:
+      app: elasticsearch
+  ports:
+    - port: 9200
+      targetPort: 9200
+      nodePort: 30029
+      protocol: TCP
+---
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#     name: elasticsearch
+#     labels:
+#       app: elasticsearch
+#       project: palinta
+#     annotations:
+#       kubernetes.io/ingress.class: nginx
+# spec:
+#     rules:
+#     - host: elk.apps.okd.codespring.ro
+#     http:
+#         paths:
+#         - path: /
+#         backend:
+#             serviceName: elasticsearch
+#             servicePort: 9200
+# ---

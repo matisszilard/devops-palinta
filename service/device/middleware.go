@@ -4,25 +4,25 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/metrics"
 	"github.com/matisszilard/devops-palinta/pkg/model"
+	"github.com/sirupsen/logrus"
 )
 
 type loggingMiddleware struct {
-	logger log.Logger
+	logger *logrus.Logger
 	next   StringService
 }
 
 func (mw loggingMiddleware) Uppercase(s string) (output string, err error) {
 	defer func(begin time.Time) {
-		mw.logger.Log(
-			"method", "uppercase",
-			"input", s,
-			"output", output,
-			"err", err,
-			"took", time.Since(begin),
-		)
+		mw.logger.WithFields(logrus.Fields{
+			"method": "uppercase",
+			"input":  s,
+			"output": output,
+			"err":    err,
+			"took":   time.Since(begin),
+		}).Info("Upper case middleware called")
 	}(time.Now())
 
 	output, err = mw.next.Uppercase(s)
@@ -31,12 +31,12 @@ func (mw loggingMiddleware) Uppercase(s string) (output string, err error) {
 
 func (mw loggingMiddleware) GetDevices() (output []model.Device, err error) {
 	defer func(begin time.Time) {
-		mw.logger.Log(
-			"method", "get all",
-			"output", output,
-			"err", err,
-			"took", time.Since(begin),
-		)
+		mw.logger.WithFields(logrus.Fields{
+			"method": "GetDevices",
+			"output": output,
+			"err":    err,
+			"took":   time.Since(begin),
+		}).Info("Get devices middleware called")
 	}(time.Now())
 
 	output, err = mw.next.GetDevices()
