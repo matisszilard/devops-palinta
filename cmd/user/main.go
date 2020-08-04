@@ -34,14 +34,15 @@ func main() {
 		Help:      "The result of each count method.",
 	}, []string{}) // no fields here
 
+	logrus.SetFormatter(&logrus.JSONFormatter{})
+
 	log := logrus.New()
 	// Logstash logger
-	conn, err := net.Dial("tcp", "elk-logstash.apps.okd.codespring.ro:80")
-	// conn, err := net.Dial("tcp", "okd-5mthh-worker-tb667.apps.okd.codespring.ro:32551")
+	conn, err := net.Dial("tcp", "localhost:5000")
 	if err != nil {
 		log.Fatal(err)
 	}
-	hook := logrustash.New(conn, logrustash.DefaultFormatter(logrus.Fields{"type": "palinta-device"}))
+	hook := logrustash.New(conn, logrustash.DefaultFormatter(logrus.Fields{"type": "palinta-user"}))
 	log.Hooks.Add(hook)
 
 	var svc user.UserService

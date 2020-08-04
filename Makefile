@@ -25,6 +25,22 @@ up: oc-up
 
 down: oc-down
 
+elastic:
+	oc apply -f ${DEVOPS}/devops-palinta/kube/elk/elasticsearch.yaml -n elk-monitor
+
+logstash:
+	oc apply -f ${DEVOPS}/devops-palinta/kube/elk/logstash.yaml -n elk-monitor
+
+kibana:
+	oc apply -f ${DEVOPS}/devops-palinta/kube/elk/kibana.yaml -n elk-monitor
+
+run-logstash:
+	docker run --rm -it -v ${DEVOPS}/devops-palinta/kube/elk/cfg/logstash.yml:/usr/share/logstash/config/logstash.yml -v ${DEVOPS}/devops-palinta/kube/elk/cfg/pipeline:/usr/share/logstash/pipeline/ -p 5044:5044 -p 5000:5000 logstash:7.8.1
+
+ek: elastic kibana
+
+elk: elastic kibana
+
 build:
 	mkdir build
 

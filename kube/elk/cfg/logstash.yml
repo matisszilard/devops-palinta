@@ -1,0 +1,2 @@
+http.host: "0.0.0.0"
+xpack.monitoring.elasticsearch.hosts: [ "http://okd-5mthh-worker-tb667.apps.okd.codespring.ro:30029" ]

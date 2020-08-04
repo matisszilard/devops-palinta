@@ -45,7 +45,7 @@ metadata:
   name: kibana
   labels:
     app: kibana
-    project: palinta
+    project: elk
 spec:
   type: NodePort
   selector:
@@ -58,12 +58,12 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-    name: palinta-kibana-ingress
+    name: elk-kibana-ingress
     annotations:
       kubernetes.io/ingress.class: nginx
 spec:
     rules:
-    - host: palinta-kibana.apps.okd.codespring.ro
+    - host: elk-kibana.apps.okd.codespring.ro
       http:
         paths:
         - path: /
