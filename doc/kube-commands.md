@@ -78,7 +78,7 @@ kubectl expose deployment influxdb --port=8086 --target-port=8086 --protocol=TCP
 
 ```
 kubectl create configmap grafana-config \
-  --from-file=datasource.yml=$DEVOPS/devops-palinta/kube/configmap/data_source.yaml \
-  --from-file=dashboard-provider.yml=$DEVOPS/devops-palinta/kube/configmap/grafana-dashboard-provider.yml \
-  --from-file=dashboard.json=$DEVOPS/devops-palinta/kube/configmap/dashboard.json
+  --from-file=datasource.yml=$DEVOPS/devops-palinta/devops/configmap/data_source.yaml \
+  --from-file=dashboard-provider.yml=$DEVOPS/devops-palinta/devops/configmap/grafana-dashboard-provider.yml \
+  --from-file=dashboard.json=$DEVOPS/devops-palinta/devops/configmap/dashboard.json
 ```

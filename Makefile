@@ -10,32 +10,32 @@ all: oc-up
 # Kubernetes and Openshift predefined commands
 
 kube-up:
-	kubectl apply -f ${DEVOPS}/devops-palinta/kube
+	kubectl apply -f ${DEVOPS}/devops-palinta/devops
 
 kube-down:
-	kubectl delete -f ${DEVOPS}/devops-palinta/kube
+	kubectl delete -f ${DEVOPS}/devops-palinta/devops
 
 oc-up:
-	oc apply -f ${DEVOPS}/devops-palinta/kube -n msz-palinta
+	oc apply -f ${DEVOPS}/devops-palinta/devops -n msz-palinta
 
 oc-down:
-	oc delete -f ${DEVOPS}/devops-palinta/kube -n msz-palinta
+	oc delete -f ${DEVOPS}/devops-palinta/devops -n msz-palinta
 
 up: oc-up
 
 down: oc-down
 
 elastic:
-	oc apply -f ${DEVOPS}/devops-palinta/kube/elk/elasticsearch.yaml -n elk-monitor
+	oc apply -f ${DEVOPS}/devops-palinta/devops/elk/elasticsearch.yaml -n elk-monitor
 
 logstash:
-	oc apply -f ${DEVOPS}/devops-palinta/kube/elk/logstash.yaml -n elk-monitor
+	oc apply -f ${DEVOPS}/devops-palinta/devops/elk/logstash.yaml -n elk-monitor
 
 kibana:
-	oc apply -f ${DEVOPS}/devops-palinta/kube/elk/kibana.yaml -n elk-monitor
+	oc apply -f ${DEVOPS}/devops-palinta/devops/elk/kibana.yaml -n elk-monitor
 
 run-logstash:
-	docker run --rm -it -v ${DEVOPS}/devops-palinta/kube/elk/cfg/logstash.yml:/usr/share/logstash/config/logstash.yml -v ${DEVOPS}/devops-palinta/kube/elk/cfg/pipeline:/usr/share/logstash/pipeline/ -p 5044:5044 -p 5000:5000 logstash:7.8.1
+	docker run --rm -it -v ${DEVOPS}/devops-palinta/devops/elk/cfg/logstash.yml:/usr/share/logstash/config/logstash.yml -v ${DEVOPS}/devops-palinta/devops/elk/cfg/pipeline:/usr/share/logstash/pipeline/ -p 5044:5044 -p 5000:5000 logstash:7.8.1
 
 ek: elastic kibana
 
