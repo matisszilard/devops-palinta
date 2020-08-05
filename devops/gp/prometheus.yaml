@@ -86,3 +86,20 @@ data:
       - job_name: 'grafana'
         static_configs:
           - targets: ['grafana:80']
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: palinta-prometheus-ingress
+    annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+    rules:
+    - host: p-prom.apps.okd.codespring.ro
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: prometheus
+            servicePort: 9090
+---

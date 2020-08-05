@@ -70,3 +70,19 @@ spec:
       targetPort: 3000
       protocol: TCP
 ---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: palinta-grafana-ingress
+    annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+    rules:
+    - host: palinta.apps.okd.codespring.ro
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: grafana
+            servicePort: 80
+---

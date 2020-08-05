@@ -3,11 +3,14 @@
 # |    (_| | | | ) |_ (_|
 #
 
-.PHONY: all kube-up kube-down oc-up oc-down build clean xbuild docker-demeter docker-generator docker
+.PHONY: all kube-up kube-down oc-up oc-down build clean docker-demeter docker-generator docker
 
-all: oc-up
+all: palinta-up
 
-# Kubernetes and Openshift predefined commands
+#
+# |_/     |_   _  _  _   _ |_  _  _
+# | \ |_| |_) (- |  | ) (- |_ (- _)
+#
 
 kube-up:
 	kubectl apply -f ${DEVOPS}/devops-palinta/devops
@@ -15,15 +18,21 @@ kube-up:
 kube-down:
 	kubectl delete -f ${DEVOPS}/devops-palinta/devops
 
-oc-up:
-	oc apply -f ${DEVOPS}/devops-palinta/devops -n msz-palinta
+palinta-up:
+	oc apply -f ${DEVOPS}/devops-palinta/devops/palinta -n msz-palinta
 
-oc-down:
-	oc delete -f ${DEVOPS}/devops-palinta/devops -n msz-palinta
+palinta-down:
+	oc delete -f ${DEVOPS}/devops-palinta/devops/palinta -n msz-palinta
 
-up: oc-up
+up: palinta-up
 
-down: oc-down
+down: palinta-down
+
+gp:
+	oc apply -f ${DEVOPS}/devops-palinta/devops/gp -n msz-palinta
+
+gp-down:
+	oc delete -f ${DEVOPS}/devops-palinta/devops/gp -n msz-palinta
 
 elastic:
 	oc apply -f ${DEVOPS}/devops-palinta/devops/elk/elasticsearch.yaml -n elk-monitor
@@ -39,15 +48,12 @@ run-logstash:
 
 ek: elastic kibana
 
-elk: elastic kibana
+elk: elastic logstash kibana
 
-build:
-	mkdir build
-
-clean:
-	rm -rf build
-
-# Build rules for Palinta projects
+#  __
+# |__)     . |  _|
+# |__) |_| | | (_|
+#
 
 build-demeter:
 	cd cmd/demeter;   GOOS=linux   GOARCH=amd64 go build -o ../../build/linux-amd64/demeter; cd ../..
@@ -65,9 +71,15 @@ build-user:
 	cd cmd/user;   GOOS=linux   GOARCH=amd64 go build -o ../../build/linux-amd64/user; cd ../..
 	cd cmd/user;   GOOS=darwin  GOARCH=amd64 go build -o ../../build/macos-amd64/user; cd ../..
 
-xbuild: clean build-demeter build-data-generator build-device build-user
+build: clean build-demeter build-data-generator build-device build-user
 
-# Build rules for building socker images
+clean:
+	rm -rf build
+
+#  __
+# |__)     . |  _|    _|  _   _ |   _  _
+# |__) |_| | | (_|   (_| (_) (_ |( (- |
+#
 
 docker-demeter: build-demeter
 	docker build --build-arg target=demeter -t demeter -f ./Dockerfile .
@@ -83,7 +95,10 @@ docker-user: build-user
 
 docker-build: docker-demeter docker-generator docker-device docker-user
 
-# Push Palinta images
+#  __
+# |__)      _ |_
+# |    |_| _) | )
+#
 
 tag ?= latest
 docker-push-device: clean docker-device

@@ -1,6 +1,8 @@
 # Palinta devops playground [![Build Status](https://travis-ci.com/matisszilard/devops-palinta.svg?branch=master)](https://travis-ci.com/github/matisszilard/devops-palinta)
 
-Playground project for Kubernetes, Openshift, AWS, etc.
+Playground project for DEVOPS related solutions.
+
+It contains simple microservices
 
 Note: the listed commands, params are heavily specific. To able to run in your
 environment please change the kube configs, docker hub specific parameters to your
@@ -11,23 +13,17 @@ configuration.
 To generate the binaries run the following command:
 
 ```sh
-make xbuild
+make build
 ```
 
-It is going to generate the macOS and Linux binaries.
+It is going to generate the macOS and Linux binaries for each microservice.
 
 ## Build the project using docker
 
-Build `demeter`:
+In order to build the microservices into docker please run the following command:
 
 ```sh
-make docker-demeter
-```
-
-Build data generator:
-
-```sh
-make docker-generator
+make docker-build
 ```
 
 ## Upload it to Kubernetes
