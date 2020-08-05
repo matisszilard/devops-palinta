@@ -111,7 +111,7 @@ docker-push-user: clean docker-user
 	docker push mszg/palinta-user:${tag}
 
 tag ?= latest
-docker-push: xbuild docker-build
+docker-push: build docker-build
 	docker tag demeter mszg/palinta-demeter:${tag}
 	docker push mszg/palinta-demeter:${tag}
 	docker tag data-generator mszg/palinta-generator:${tag}
