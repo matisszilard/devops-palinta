@@ -37,7 +37,6 @@ func main() {
 	logrus.SetFormatter(&logrus.JSONFormatter{})
 
 	log := logrus.New()
-	// Logstash logger
 	conn, err := net.Dial("tcp", "localhost:5000")
 	if err != nil {
 		log.Fatal(err)
