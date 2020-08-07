@@ -23,6 +23,13 @@ spec:
           env:
             - name: discovery.type
               value: single-node
+          volumeMounts:
+            - mountPath: /usr/share/elasticsearch/data
+              name: var-lib-elasticsearch
+      volumes:
+        - name: var-lib-elasticsearch
+          persistentVolumeClaim:
+            claimName: elasticsearch
 ---
 apiVersion: v1
 kind: Service

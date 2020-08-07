@@ -34,8 +34,14 @@ gp:
 gp-down:
 	oc delete -f ${DEVOPS}/devops-palinta/devops/gp -n msz-palinta
 
-elastic:
+elastic-pvc:
+	oc apply -f ${DEVOPS}/devops-palinta/devops/elk/pvc.yaml -n elk-monitor
+
+elastic: elastic-pvc
 	oc apply -f ${DEVOPS}/devops-palinta/devops/elk/elasticsearch.yaml -n elk-monitor
+
+elastic-down:
+	oc delete -f ${DEVOPS}/devops-palinta/devops/elk/elasticsearch.yaml -n elk-monitor
 
 logstash:
 	oc apply -f ${DEVOPS}/devops-palinta/devops/elk/logstash.yaml -n elk-monitor
@@ -43,12 +49,29 @@ logstash:
 kibana:
 	oc apply -f ${DEVOPS}/devops-palinta/devops/elk/kibana.yaml -n elk-monitor
 
+kibana-down:
+	oc delete -f ${DEVOPS}/devops-palinta/devops/elk/kibana.yaml -n elk-monitor
+
 run-logstash:
 	docker run --rm -it -v ${DEVOPS}/devops-palinta/devops/elk/cfg/logstash.yml:/usr/share/logstash/config/logstash.yml -v ${DEVOPS}/devops-palinta/devops/elk/cfg/pipeline:/usr/share/logstash/pipeline/ -p 5044:5044 -p 5000:5000 logstash:7.8.1
 
 ek: elastic kibana
 
+ek-down: elastic-down kibana-down
+
 elk: elastic logstash kibana
+
+jenkins-pvc:
+	oc apply -f ${DEVOPS}/devops-palinta/devops/jenkins/pvc.yaml -n msz-palinta
+
+jenkins-pvc-down:
+	oc delete -f ${DEVOPS}/devops-palinta/devops/jenkins/pvc.yaml -n msz-palinta
+
+jenkins: jenkins-pvc
+	oc apply -f ${DEVOPS}/devops-palinta/devops/jenkins/jenkins.yaml -n msz-palinta
+
+jenkins-down:
+	oc delete -f ${DEVOPS}/devops-palinta/devops/jenkins/jenkins.yaml -n msz-palinta
 
 #  __
 # |__)     . |  _|
@@ -75,6 +98,9 @@ build: clean build-demeter build-data-generator build-device build-user
 
 clean:
 	rm -rf build
+
+test:
+	go test ./...
 
 #  __
 # |__)     . |  _|    _|  _   _ |   _  _
