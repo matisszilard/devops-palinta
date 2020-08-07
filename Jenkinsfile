@@ -10,6 +10,14 @@ pipeline {
                 sh 'make build'
             }
         }
+        stage('Test') {
+            agent { 
+                label 'golang'
+            }
+            steps {
+                sh 'go test ./...'
+            }
+        }
         stage('Build docker images') {
             agent { 
                 label 'docker'
