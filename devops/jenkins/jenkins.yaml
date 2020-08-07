@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jenkins
+  name: jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+        - image: jenkins/jenkins:lts
+          name: jenkins
+          ports:
+            - containerPort: 8080
+              name: jenkins
+            - containerPort: 50000
+              name: jenkins-agent
+          volumeMounts:
+            - mountPath: /var/jenkins_home/
+              name: var-lib-jenkins
+            # - name: jenkins-config-volume
+            #   mountPath: /etc/jenkins/jenkins.yml
+            #   subPath: jenkins.yml
+      serviceAccount: jenkins
+      volumes:
+        # - name: jenkins-config-volume
+        #   configMap:
+        #     name: jenkins-config
+        - name: var-lib-jenkins
+          persistentVolumeClaim:
+            claimName: jenkins
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+  labels:
+    app: jenkins
+    project: palinta
+spec:
+  type: NodePort
+  selector:
+    app: jenkins
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: jenkins
+    - port: 50000
+      targetPort: 50000
+      name: jenkins-agent
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: jenkins-config
+# data:
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: palinta-jenkins-ingress
+    annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+    rules:
+    - host: jenkins.apps.okd.codespring.ro
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: jenkins
+            servicePort: 8080
+---
