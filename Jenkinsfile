@@ -10,7 +10,7 @@ pipeline {
                 sh 'make build'
             }
         }
-        stage('Build') {
+        stage('Build docker images') {
             agent { 
                 label 'docker'
             }
