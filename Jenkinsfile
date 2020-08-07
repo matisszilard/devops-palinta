@@ -10,5 +10,13 @@ pipeline {
                 sh 'make build'
             }
         }
+        stage('Build') {
+            agent { 
+                label 'docker'
+            }
+            steps {
+                sh 'make docker-build'
+            }
+        }
     }
 }
