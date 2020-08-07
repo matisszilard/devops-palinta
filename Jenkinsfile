@@ -18,5 +18,13 @@ pipeline {
                 sh 'make docker-build'
             }
         }
+        stage('Deploy docker images') {
+            agent { 
+                label 'docker'
+            }
+            steps {
+                sh 'make docker-push'
+            }
+        }
     }
 }
