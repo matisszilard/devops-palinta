@@ -25,14 +25,8 @@ spec:
           volumeMounts:
             - mountPath: /var/jenkins_home/
               name: var-lib-jenkins
-            # - name: jenkins-config-volume
-            #   mountPath: /etc/jenkins/jenkins.yml
-            #   subPath: jenkins.yml
       serviceAccount: jenkins
       volumes:
-        # - name: jenkins-config-volume
-        #   configMap:
-        #     name: jenkins-config
         - name: var-lib-jenkins
           persistentVolumeClaim:
             claimName: jenkins
@@ -55,13 +49,8 @@ spec:
       name: jenkins
     - port: 50000
       targetPort: 50000
+      nodePort: 30293
       name: jenkins-agent
-# ---
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: jenkins-config
-# data:
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
