@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM golang:1.14.6
 
 LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols"
 
@@ -7,11 +7,7 @@ RUN apt-get update && apt-get install -y \
     openjdk-11-jre-headless \
     apt-transport-https \
     ca-certificates \
-    curl \
-    gnupg-agent \
-    make \
-    golang \
-    software-properties-common
+    curl
 
 ARG VERSION=4.3
 ARG user=jenkins

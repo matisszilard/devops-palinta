@@ -3,7 +3,7 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent { 
+            agent {
                 label 'golang'
             }
             steps {
@@ -11,7 +11,7 @@ pipeline {
             }
         }
         stage('Test') {
-            agent { 
+            agent {
                 label 'golang'
             }
             steps {
@@ -19,7 +19,7 @@ pipeline {
             }
         }
         stage('Build docker images') {
-            agent { 
+            agent {
                 label 'docker'
             }
             steps {
@@ -27,11 +27,19 @@ pipeline {
             }
         }
         stage('Deploy docker images') {
-            agent { 
+            agent {
                 label 'docker'
             }
             steps {
                 sh 'make docker-push'
+            }
+        }
+        stage('Deploy to Kubernetes') {
+            agent {
+                label 'kubernetes'
+            }
+            steps {
+                sh 'echo "TODO :)"'
             }
         }
     }

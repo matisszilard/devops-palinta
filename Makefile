@@ -94,7 +94,7 @@ build-user:
 	cd cmd/user;   GOOS=linux   GOARCH=amd64 go build -o ../../build/linux-amd64/user; cd ../..
 	cd cmd/user;   GOOS=darwin  GOARCH=amd64 go build -o ../../build/macos-amd64/user; cd ../..
 
-build: deps clean build-demeter build-data-generator build-device build-user
+build: clean build-demeter build-data-generator build-device build-user
 
 clean:
 	rm -rf build
