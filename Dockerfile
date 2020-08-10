@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM alpine:latest
 
 ARG target
 ADD ./build/linux-amd64/${target} /${target}

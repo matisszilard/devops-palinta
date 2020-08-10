@@ -1,6 +1,8 @@
-#  __
-# |__)  _  | .  _  |_  _
-# |    (_| | | | ) |_ (_|
+#  ____            _   _           _
+# |  _ \    __ _  | | (_)  _ __   | |_    __ _
+# | |_) |  / _` | | | | | | '_ \  | __|  / _` |
+# |  __/  | (_| | | | | | | | | | | |_  | (_| |
+# |_|      \__,_| |_| |_| |_| |_|  \__|  \__,_|
 #
 
 .PHONY: all kube-up kube-down oc-up oc-down build clean docker-demeter docker-generator docker

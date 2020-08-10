@@ -10,9 +10,6 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	"github.com/sirupsen/logrus"
-
-	"github.com/olivere/elastic/v7"
-	"gopkg.in/sohlich/elogrus.v7"
 )
 
 func main() {
@@ -39,16 +36,16 @@ func main() {
 	log := logrus.New()
 
 	// Elastic logger
-	client, err := elastic.NewClient(elastic.SetURL("http://okd-5mthh-worker-tb667.apps.okd.codespring.ro:30029"), elastic.SetSniff(false))
-	if err != nil {
-		log.Panic(err)
-	}
+	// client, err := elastic.NewClient(elastic.SetURL("http://okd-5mthh-worker-tb667.apps.okd.codespring.ro:30029"), elastic.SetSniff(false))
+	// if err != nil {
+	// 	log.Panic(err)
+	// }
 
-	hook, err := elogrus.NewAsyncElasticHook(client, "http://okd-5mthh-worker-tb667.apps.okd.codespring.ro:30029", logrus.DebugLevel, "palinta-device")
-	if err != nil {
-		log.Panic(err)
-	}
-	log.Hooks.Add(hook)
+	// hook, err := elogrus.NewAsyncElasticHook(client, "http://okd-5mthh-worker-tb667.apps.okd.codespring.ro:30029", logrus.DebugLevel, "palinta-device")
+	// if err != nil {
+	// 	log.Panic(err)
+	// }
+	// log.Hooks.Add(hook)
 
 	var svc device.StringService
 	svc = device.New(log)

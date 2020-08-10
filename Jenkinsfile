@@ -15,7 +15,7 @@ pipeline {
                 label 'golang'
             }
             steps {
-                sh 'go test ./...'
+                sh 'make test'
             }
         }
         stage('Build docker images') {
@@ -39,7 +39,7 @@ pipeline {
                 label 'kubernetes'
             }
             steps {
-                sh 'echo "TODO :)"'
+                sh 'make palinta-up"'
             }
         }
     }

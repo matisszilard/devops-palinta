@@ -1,7 +1,17 @@
-FROM golang:1.14.6
+FROM golang:1.14.6 AS builder
 
 ADD . /workspace/
 
-RUN cd /workspace && make xbuild
+ARG target
+RUN cd /workspace && make build-${target}
 
-CMD ["/workspace/build/linux-amd64/data-generator"]
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+
+ARG target
+COPY --from=builder /workspace/build/linux-amd64/${target} .
+
+ARG target
+ENV target_bin=$target
+CMD ["sh", "-c", "./${target_bin}"]

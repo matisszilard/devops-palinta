@@ -17,8 +17,9 @@ spec:
         app: palinta-user
     spec:
       containers:
-        - image: mszg/palinta-user:v0.1.0
+        - image: mszg/palinta-user:latest
           name: palinta-user
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
               name: palinta-user

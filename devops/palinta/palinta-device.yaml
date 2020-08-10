@@ -19,6 +19,7 @@ spec:
       containers:
         - image: mszg/palinta-device:latest
           name: palinta-device
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
               name: palinta-device

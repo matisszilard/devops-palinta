@@ -8,9 +8,11 @@ import (
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
 	httptransport "github.com/go-kit/kit/transport/http"
 	"github.com/matisszilard/devops-palinta/service/user"
+	"github.com/olivere/elastic/v7"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/sirupsen/logrus"
+	"gopkg.in/sohlich/elogrus.v7"
 )
 
 func main() {
@@ -37,12 +39,6 @@ func main() {
 	logrus.SetFormatter(&logrus.JSONFormatter{})
 
 	log := logrus.New()
-	conn, err := net.Dial("tcp", "localhost:5000")
-	if err != nil {
-		log.Fatal(err)
-	}
-	hook := logrustash.New(conn, logrustash.DefaultFormatter(logrus.Fields{"type": "palinta-user"}))
-	log.Hooks.Add(hook)
 
 	var svc user.UserService
 	svc = user.New(log)
@@ -63,4 +59,31 @@ func main() {
 	}).Info("Starting palinta user service ...")
 
 	log.Info(http.ListenAndServe(":8080", nil))
+}
+
+func setupElasticLogger() *logrus.Logger {
+	log := logrus.New()
+	client, err := elastic.NewClient(elastic.SetURL("http://okd-5mthh-worker-tb667.apps.okd.codespring.ro:30029"), elastic.SetSniff(false))
+	if err != nil {
+		log.Panic(err)
+	}
+	hook, err := elogrus.NewAsyncElasticHook(client, "http://okd-5mthh-worker-tb667.apps.okd.codespring.ro:30029", logrus.DebugLevel, "palinta-device")
+	if err != nil {
+		log.Panic(err)
+	}
+	log.Hooks.Add(hook)
+
+	return log
+}
+
+func setupLogstashLogger() *logrus.Logger {
+	log := logrus.New()
+
+	conn, err := net.Dial("tcp", "localhost:5000")
+	if err != nil {
+		log.Fatal(err)
+	}
+	hook := logrustash.New(conn, logrustash.DefaultFormatter(logrus.Fields{"type": "palinta-user"}))
+	log.Hooks.Add(hook)
+	return log
 }
