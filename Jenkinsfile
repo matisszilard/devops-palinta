@@ -39,7 +39,7 @@ pipeline {
                 label 'kubernetes'
             }
             steps {
-                sh 'make palinta-up"'
+                sh 'make palinta-up'
             }
         }
     }
