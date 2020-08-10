@@ -2,11 +2,32 @@
 
 Playground project for DEVOPS related solutions.
 
-It contains simple microservices
+It contains simple microservices as examples.
 
 Note: the listed commands, params are heavily specific. To able to run in your
 environment please change the kube configs, docker hub specific parameters to your
 configuration.
+
+## Overview
+
+```
+.
+├── build               // Build folder for the generated binaries
+├── cmd                 // Setup module for the microservices
+│   ├── data-generator
+│   ├── demeter
+│   ├── device
+│   └── user
+├── devops              // DEVOPS related modules
+│   ├── elk             // Elasticsearch, Logstash, Kibana configuration
+│   ├── gp              // Grafana and Prometheus configuration
+│   ├── jenkins         // Jenkins configuration
+│   ├── palinta         // Example microservice configuration
+│   └── pvc             // Persistent volume claims
+├── doc                 // Documentation
+├── pkg                 // Common package for microservices
+└── service             // Service package
+```
 
 ## Build the project
 
@@ -18,6 +39,12 @@ make build
 
 It is going to generate the macOS and Linux binaries for each microservice.
 
+Makefile contains separate target for each service. A compile command in case of macOS:
+
+```sh
+cd cmd/device;   GOOS=linux   GOARCH=amd64 go build -o ../../build/linux-amd64/device; cd ../..
+```
+
 ## Build the project using docker
 
 In order to build the microservices into docker please run the following command:
@@ -26,16 +53,11 @@ In order to build the microservices into docker please run the following command
 make docker-build
 ```
 
+It is going to compile each service and build the corresponding docker image for it.
+
 ## Upload it to Kubernetes
 
-```sh
-make kube-up
-```
+Kubernetes config files can be found under the `devops` folder. For each deployment
+there is a target created in the `Makefile`.
 
-## Upload it to Openshift
-
-```sh
-make oc-up
-```
-
-Note: for more make commands please check the `Makefile`.
+For further information please check the `Makefile`.

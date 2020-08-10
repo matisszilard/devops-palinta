@@ -15,7 +15,9 @@ all: palinta-up
 #
 
 run-jenkins-agent:
-	java -jar ${DEVOPS}/jenkins/test-local-agent/agent.jar -jnlpUrl http://jenkins.apps.okd.codespring.ro/computer/cs1234m/slave-agent.jnlp -secret e3453b5bf1a1ed28883fc762e8fb50d3b569b206292aeab5deec51e2bdcf77ff \
+	java -jar ${DEVOPS}/jenkins/test-local-agent/agent.jar \
+	-jnlpUrl ${JENKINS_AGENT_URL} \
+	-secret ${JENKINS_AGENT_SECRET} \
 	-workDir "${DEVOPS}/jenkins/test-local-agent"
 
 #           __   __  __        __ ___  __  __
@@ -75,16 +77,16 @@ ek-down: elastic-down kibana-down
 elk: elastic logstash kibana
 
 jenkins-pvc:
-	oc apply -f ${DEVOPS}/devops-palinta/devops/jenkins/pvc.yaml -n msz-palinta
+	oc apply -f ${DEVOPS}/devops-palinta/devops/jenkins/pvc.yaml -n jenkins
 
 jenkins-pvc-down:
-	oc delete -f ${DEVOPS}/devops-palinta/devops/jenkins/pvc.yaml -n msz-palinta
+	oc delete -f ${DEVOPS}/devops-palinta/devops/jenkins/pvc.yaml -n jenkins
 
 jenkins: jenkins-pvc
-	oc apply -f ${DEVOPS}/devops-palinta/devops/jenkins/jenkins.yaml -n msz-palinta
+	oc apply -f ${DEVOPS}/devops-palinta/devops/jenkins/jenkins.yaml -n jenkins
 
 jenkins-down:
-	oc delete -f ${DEVOPS}/devops-palinta/devops/jenkins/jenkins.yaml -n msz-palinta
+	oc delete -f ${DEVOPS}/devops-palinta/devops/jenkins/jenkins.yaml -n jenkins
 
 #  __
 # |__)     . |  _|
