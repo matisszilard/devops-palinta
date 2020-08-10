@@ -5,6 +5,10 @@ using Jenkins.
 
 Jenkins host: http://jenkins.apps.okd.codespring.ro
 
+### :exclamation: Minimize docker image size as possible
+
+### :exclamation: Stop unnecessary pods (grafana, etc)
+
 ## Step 1: Create a custom Kubernetes Jenkins agent
 
 Create a docker image containing the Jenkins agent (jenkins/jnlp-slave) and your
@@ -13,6 +17,8 @@ project specific dependencies.
 Add your image to the Kubernetes configuration as a pod template.
 
 Create a specific job to run on Kubernetes.
+
+> Deploying and Scaling Jenkins on Kubernetes: https://rancher.com/blog/2018/2018-11-27-scaling-jenkins/
 
 ## Step 2: Create a local Jenkins agent
 
@@ -23,7 +29,7 @@ The agent should have the following possibility:
 
 - Build project (in case of multi-stage docker builds it is not required)
 - Build docker image
-- Publish docker image (Docker Hub, Gitlab registry, etc.)
+- Publish docker image (Docker Hub, GitLab registry, etc.)
 - Deploy micro services to Kubernetes cluster
 
 Create jobs, pipelines (**Step 3**)
@@ -41,8 +47,14 @@ The Jenkins pipeline should contain the following stages:
 
 > Note: use the Jenkins agents created previously.
 
+> Pipeline examples: https://github.com/jenkinsci/pipeline-examples
+
 ## Step 4: Trigger Jenkins builds
 
 Find out how can automatically trigger Jenkins builds.
+
+## Step 5: Optional: Store artifacts on Jenkins
+
+## Step 6: Optional: Create a release on Github or GitLab from Jenkins
 
 ## Step ?: Have a :beer:, have a kitkat! :tada:

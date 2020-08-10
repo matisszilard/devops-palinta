@@ -9,9 +9,18 @@
 
 all: palinta-up
 
+#  __   __
+# |  \ |_  \  /
+# |__/ |__  \/
 #
-# |_/     |_   _  _  _   _ |_  _  _
-# | \ |_| |_) (- |  | ) (- |_ (- _)
+
+run-jenkins-agent:
+	java -jar ${DEVOPS}/jenkins/test-local-agent/agent.jar -jnlpUrl http://jenkins.apps.okd.codespring.ro/computer/cs1234m/slave-agent.jnlp -secret e3453b5bf1a1ed28883fc762e8fb50d3b569b206292aeab5deec51e2bdcf77ff \
+	-workDir "${DEVOPS}/jenkins/test-local-agent"
+
+#           __   __  __        __ ___  __  __
+# |_/ /  \ |__) |_  |__) |\ | |_   |  |_  (_
+# | \ \__/ |__) |__ | \  | \| |__  |  |__ __)
 #
 
 kube-up:
@@ -21,10 +30,12 @@ kube-down:
 	kubectl delete -f ${DEVOPS}/devops-palinta/devops
 
 palinta-up:
-	oc apply -f ${DEVOPS}/devops-palinta/devops/palinta -n msz-palinta
+	oc apply -f ${DEVOPS}/devops-palinta/devops/palinta/palinta-user.yaml -n msz-palinta
+	oc apply -f ${DEVOPS}/devops-palinta/devops/palinta/palinta-device.yaml -n msz-palinta
 
 palinta-down:
-	oc delete -f ${DEVOPS}/devops-palinta/devops/palinta -n msz-palinta
+	oc delete -f ${DEVOPS}/devops-palinta/devops/palinta/palinta-user.yaml -n msz-palinta
+	oc delete -f ${DEVOPS}/devops-palinta/devops/palinta/palinta-device.yaml -n msz-palinta
 
 up: palinta-up
 
