@@ -1,36 +1,38 @@
 pipeline {
     agent none
-    stage('Build') {
-      agent {
-        kubernetes {
-          label 'jenkinsrun'
-          defaultContainer 'builder'
-          yaml """
-    kind: Pod
-    metadata:
-      name: kaniko
-    spec:
-      containers:
-      - name: builder
-        image: gcr.io/kaniko-project/executor:debug-v0.22.0
-        imagePullPolicy: Always
-        command:
-        - /busybox/cat
-        tty: true
-        volumeMounts:
-          - name: docker-config
-            mountPath: /kaniko/.docker
-      volumes:
-        - name: docker-config
-          configMap:
-            name: docker-config
-    """
-        }
-      }
-    steps {
-          script {
-            sh "/kaniko/executor --no-push --build-arg ARCH=user --dockerfile `pwd`/Dockerfile.build --context `pwd`"
-        } // container
-      } // steps
-    } // stage(build)
+    stages {
+        stage('Build') {
+          agent {
+            kubernetes {
+              label 'jenkinsrun'
+              defaultContainer 'builder'
+              yaml """
+kind: Pod
+metadata:
+  name: kaniko
+spec:
+  containers:
+  - name: builder
+    image: gcr.io/kaniko-project/executor:debug-v0.22.0
+    imagePullPolicy: Always
+    command:
+    - /busybox/cat
+    tty: true
+    volumeMounts:
+      - name: docker-config
+        mountPath: /kaniko/.docker
+  volumes:
+    - name: docker-config
+      configMap:
+        name: docker-config
+        """
+            }
+          }
+        steps {
+              script {
+                sh "/kaniko/executor --no-push --build-arg ARCH=user --dockerfile `pwd`/Dockerfile.build --context `pwd`"
+            } // container
+          } // steps
+        } // stage(build)
+    } // stages
 } // pipeline
