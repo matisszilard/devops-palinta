@@ -92,7 +92,7 @@ kind: Ingress
 metadata:
     name: palinta-prometheus-ingress
     annotations:
-    kubernetes.io/ingress.class: nginx
+        kubernetes.io/ingress.class: nginx
 spec:
     rules:
     - host: p-prom.apps.okd.codespring.ro

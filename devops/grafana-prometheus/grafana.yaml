@@ -75,7 +75,7 @@ kind: Ingress
 metadata:
     name: palinta-grafana-ingress
     annotations:
-    kubernetes.io/ingress.class: nginx
+        kubernetes.io/ingress.class: nginx
 spec:
     rules:
     - host: palinta.apps.okd.codespring.ro
