@@ -7,16 +7,6 @@ pipeline {
               label 'jenkinsrun'
               defaultContainer 'builder'
               yaml """
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: docker-config
-data:
-  config.json: |-
-    {
-       "credsStore": "ecr-login"
-    }
----
 kind: Pod
 metadata:
   name: kaniko
@@ -25,16 +15,11 @@ spec:
   - name: builder
     image: gcr.io/kaniko-project/executor:debug-v0.22.0
     imagePullPolicy: Always
+    securityContext:
+      runAsUser: 0
     command:
     - /busybox/cat
     tty: true
-    volumeMounts:
-      - name: docker-config
-        mountPath: /kaniko/.docker
-  volumes:
-    - name: docker-config
-      configMap:
-        name: docker-config
         """
             }
           }
