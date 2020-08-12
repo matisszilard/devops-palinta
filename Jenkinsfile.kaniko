@@ -4,9 +4,19 @@ pipeline {
         stage('Build') {
           agent {
             kubernetes {
-              label 'jenkinsrun'
+              label 'jenkins-run-kaniko'
               defaultContainer 'builder'
               yaml """
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docker-config
+data:
+  config.json: |-
+    {
+       "credsStore": "ecr-login"
+    }
+---
 kind: Pod
 metadata:
   name: kaniko
@@ -18,12 +28,19 @@ spec:
     command:
     - /busybox/cat
     tty: true
+    volumeMounts:
+      - name: docker-config
+        mountPath: /kaniko/.docker
+  volumes:
+    - name: docker-config
+      configMap:
+        name: docker-config
         """
             }
           }
         steps {
               script {
-                sh "/kaniko/executor --no-push --build-arg ARCH=user --dockerfile `pwd`/Dockerfile.build --context `pwd`"
+                sh "/kaniko/executor --no-push --build-arg target=user --dockerfile `pwd`/Dockerfile.build --context `pwd`"
             } // container
           } // steps
         } // stage(build)
