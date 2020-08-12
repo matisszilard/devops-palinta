@@ -4,13 +4,14 @@ pipeline {
         stage('Build') {
           agent {
             kubernetes {
-              label 'jenkinsrun'
+              label 'jenkins'
               defaultContainer 'builder'
               yaml """
 kind: Pod
 metadata:
   name: kaniko
 spec:
+  serviceAccount: jenkins
   containers:
   - name: builder
     image: gcr.io/kaniko-project/executor:debug-v0.22.0
