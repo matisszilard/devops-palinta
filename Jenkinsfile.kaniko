@@ -22,12 +22,12 @@ spec:
     - /busybox/cat
     tty: true
         """
-            }
-          }
-        steps {
+            } // kubernetes
+          } // agent
+          steps {
               script {
                 sh "/kaniko/executor --no-push --build-arg target=user --dockerfile `pwd`/Dockerfile.build --context `pwd`"
-            } // container
+              } // container
           } // steps
         } // stage(build)
     } // stages
