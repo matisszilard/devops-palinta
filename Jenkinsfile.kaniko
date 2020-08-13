@@ -21,7 +21,7 @@ spec:
           } // agent
           steps {
               script {
-                sh "/kaniko/executor --no-push --build-arg target=user --dockerfile `pwd`/Dockerfile.build --context `pwd`"
+                sh "make build"
               } // container
           } // steps
         } // stage(build)
