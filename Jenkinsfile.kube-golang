@@ -17,7 +17,7 @@ spec:
     imagePullPolicy: Always
     env:
     - name: GOCACHE
-      value: "/home/jenkins/.cache"
+      value: "/home/jenkins/agent/.cache"
     tty: true
         """
             } // kubernetes
