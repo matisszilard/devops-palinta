@@ -20,6 +20,25 @@ run-jenkins-agent:
 	-secret ${JENKINS_AGENT_SECRET} \
 	-workDir "${DEVOPS}/jenkins/test-local-agent"
 
+run-jenkins-golang-agent-in-docker:
+	docker run -it --rm \
+	--env JENKINS_SECRET=${JENKINS_AGENT_GOLANG_DOCKER_SECRET} \
+	--env JENKINS_TUNNEL=${JENKINS_TUNNEL} \
+	--env JENKINS_AGENT_NAME=${JENKINS_AGENT_GOLANG_DOCKER_NAME} \
+	--env JENKINS_AGENT_WORKDIR=${JENKINS_AGENT_GOLANG_DOCKER_WORKDIR} \
+	--env JENKINS_URL=${JENKINS_URL} \
+	mszg/jenkins-slave:v0.5.0
+
+run-jenkins-agent-docker-in-docker:
+	docker run -it --rm \
+	--env JENKINS_SECRET=${JENKINS_AGENT_GOLANG_DOCKER_SECRET} \
+	--env JENKINS_TUNNEL=${JENKINS_TUNNEL} \
+	--env JENKINS_AGENT_NAME=${JENKINS_AGENT_GOLANG_DOCKER_NAME} \
+	--env JENKINS_AGENT_WORKDIR=${JENKINS_AGENT_GOLANG_DOCKER_WORKDIR} \
+	--env JENKINS_URL=${JENKINS_URL} \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	jenkins-agent:latest
+
 #           __   __  __        __ ___  __  __
 # |_/ /  \ |__) |_  |__) |\ | |_   |  |_  (_
 # | \ \__/ |__) |__ | \  | \| |__  |  |__ __)
