@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
           agent {
             kubernetes {
-              label 'jenkins'
+              label 'kaniko'
               defaultContainer 'builder'
               yaml """
 kind: Pod
