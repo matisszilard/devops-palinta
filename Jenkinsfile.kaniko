@@ -4,22 +4,17 @@ pipeline {
         stage('Build') {
           agent {
             kubernetes {
-              label 'kaniko'
+              label 'msz-golang'
               defaultContainer 'builder'
               yaml """
 kind: Pod
 metadata:
-  name: kaniko
+  name: msz-golang
 spec:
-  serviceAccount: jenkins
   containers:
   - name: builder
-    image: gcr.io/kaniko-project/executor:debug-v0.22.0
+    image: golang:1.14.6
     imagePullPolicy: Always
-    securityContext:
-      runAsUser: 0
-    command:
-    - /busybox/cat
     tty: true
         """
             } // kubernetes
