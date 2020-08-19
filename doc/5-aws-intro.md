@@ -17,11 +17,24 @@ The described steps are a simple walk through on the training videos.
 
 ## Step 2: Create VPC
 
-And: subnet, routers, internet gateways. Allow outgoing communication.
+And the others: subnet, routers, internet gateways. Allow outgoing communication.
+
+### Reference
+
+- VPC: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+- VPC: https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html
+- Route tables: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
+- IP Addressing in your VPC: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html
+- Regions and Zones: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
 
 ## Step 3: Create an EC2
 
 Create a new EC2 instance (!use free tier version). Install nginx.
+
+### Reference
+
+- EC2: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html
+- Instances and AMIs: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instances-and-amis.html
 
 ## Step 4: Create a rule to access S3 from EC2 instance
 
@@ -36,3 +49,8 @@ Create a new EC2 instance (!use free tier version). Install nginx.
 ## Optional: Step 9: Try out different lambda template (Ex. Python, Go, Java, etc.)
 
 ## Step 10: Have a :beer:, have a kitkat! :tada:
+
+## Links
+
+- Infrastructure as a service (IaaS): https://docs.microsoft.com/en-gb/learn/modules/principles-cloud-computing/5-types-of-cloud-services
+- AWS Lambda function in the cloud: https://medium.com/free-code-camp/going-serverless-how-to-run-your-first-aws-lambda-function-in-the-cloud-d866a9b51536
