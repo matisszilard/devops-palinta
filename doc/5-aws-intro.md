@@ -29,7 +29,7 @@ And the others: subnet, routers, internet gateways. Allow outgoing communication
 
 ## Step 3: Create an EC2
 
-Create a new EC2 instance (!use free tier version). Install nginx.
+Create a new EC2 instance (use free tier version). Install nginx.
 
 ### Reference
 
@@ -48,7 +48,9 @@ Create a new EC2 instance (!use free tier version). Install nginx.
 
 ## Optional: Step 9: Try out different lambda template (Ex. Python, Go, Java, etc.)
 
-## Step 10: Have a :beer:, have a kitkat! :tada:
+## Optional: Step 10: Use the force Luke (CLI)
+
+## Step 11: Have a :beer:, have a kitkat! :tada:
 
 ## Links
 
