@@ -1,1 +1,7 @@
 build/
+terraform
+terraform.pub
+.terraform
+*.zip
+*.tfstate
+*.tfstate.backup
