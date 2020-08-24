@@ -26,6 +26,7 @@ Requirements:
 - Have at least 1 private lambda function
 - Have a simple web interface to call the public lambdas
 - Host the web site on EC2 or on S3
+- Deploy site updates using CI/CD
 - Optional: deploy site on Amplify
 
 ## Step 5: Have a :beer:, have a kitkat! :tada:
