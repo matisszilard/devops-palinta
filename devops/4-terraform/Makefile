@@ -38,8 +38,7 @@ create-ui:
 url?=https://zj3ba3zqn2.execute-api.eu-central-1.amazonaws.com/dev
 build-ui:
 	rm -rf ./ui/index.html
-	cat ./ui/index-template.html > ./ui/index.html
-	sed -i -r 's#GONDOL_URL#${url}#' ./ui/index.html
+	cat ./ui/index-template.html | sed 's#GONDOL_URL#${url}#' > ./ui/index.html
 
 url?=https://zj3ba3zqn2.execute-api.eu-central-1.amazonaws.com/dev
 sync-ui: build-ui

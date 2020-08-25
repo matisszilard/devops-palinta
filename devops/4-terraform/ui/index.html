@@ -7,12 +7,12 @@
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById(
 							"response"
-						).innerHTML = "Response: " + this.responseText;
+						).innerHTML = this.responseText;
 					}
 				};
 				xhttp.open(
 					"GET",
-					"https://zj3ba3zqn2.execute-api.eu-central-1.amazonaws.com/dev/oath?name="+document.getElementById(
+					"https://oh07qfzux9.execute-api.eu-central-1.amazonaws.com/dev/oath?name="+document.getElementById(
 							"hero_name"
 						).value,
 					true

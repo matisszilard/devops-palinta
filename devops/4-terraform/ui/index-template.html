@@ -7,7 +7,7 @@
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById(
 							"response"
-						).innerHTML = "Response: " + this.responseText;
+						).innerHTML = this.responseText;
 					}
 				};
 				xhttp.open(
