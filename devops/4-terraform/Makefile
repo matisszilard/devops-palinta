@@ -4,13 +4,16 @@ all:
 
 # Terraform commands
 
-version?=v0.1.0
-up:
-	terraform apply -var="app_version=${version}"
+version?=latest
+oath_app_version?=${version}
+hero_app_version?=${version}
+up: deploy-oath build-hero
+	terraform apply -var="app_version=${oath_app_version}" -var="hero_app_version=${hero_app_version}"
 
-version?=v0.1.0
+version?=latest
+hero_app_version?=latest
 down:
-	terraform destroy -var="app_version=${version}"
+	terraform destroy -var="app_version=${version}" -var="hero_app_version=${hero_app_version}"
 
 # Prepare s3 buckets on aws
 
@@ -31,8 +34,18 @@ test-ui:
 
 # Build and deploy lambdas
 
-version?=v0.1.0
-deploy-oath:
+build-oath:
 	cd lambda/oath; GOOS=linux go build -o ../../build/main main.go; cd ../..
 	zip -jrm build/oath.zip build/main
+
+version?=latest
+deploy-oath: build-oath
 	aws s3 cp build/oath.zip s3://mszg-gondol/${version}/
+
+build-hero:
+	cd lambda/hero; GOOS=linux go build -o ../../build/main main.go; cd ../..
+	zip -jrm build/hero.zip build/main
+
+version?=latest
+deploy-hero: build-hero
+	aws s3 cp build/hero.zip s3://mszg-gondol/${version}/

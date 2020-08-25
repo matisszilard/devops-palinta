@@ -7,16 +7,17 @@
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById(
 							"response"
-						).innerHTML = this.responseText;
+						).innerHTML = "Response: " + this.responseText;
 					}
 				};
 				xhttp.open(
 					"GET",
-					"https://tdnlb9gnhg.execute-api.eu-central-1.amazonaws.com/dev/oath?name="+document.getElementById(
+					"https://zj3ba3zqn2.execute-api.eu-central-1.amazonaws.com/dev/oath?name="+document.getElementById(
 							"hero_name"
 						).value,
 					true
 				);
+				xhttp.setRequestHeader('Content-type', 'text/plain; charset=utf-8')
 				xhttp.send();
 			}
 		</script>
@@ -36,7 +37,7 @@
 			<input type="text" id="hero_name" name="hero_name" />
 			<button onclick="makeOath()">Send</button>
 			<br />
-			<h1>Response: <span id="response"></span></h1>
+			<h2><span id="response"></span></h2>
 		</div>
 	</body>
 </html>
