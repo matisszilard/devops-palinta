@@ -7,7 +7,7 @@ pipeline {
                 label 'golang'
             }
             steps {
-                sh 'make build-lb'
+                sh 'cd ./devops/4-terraform; make build-lb'
             }
         }
         stage('Deploy') {
