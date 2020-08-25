@@ -1,0 +1,22 @@
+pipeline {
+    agent none
+
+    stages {
+        stage('Build') {
+            agent {
+                label 'golang'
+            }
+            steps {
+                sh 'make build-lb'
+            }
+        }
+        stage('Deploy') {
+            agent {
+                label 'terraform'
+            }
+            steps {
+                sh 'cd ./devops/4-terraform; make up'
+            }
+        }
+    }
+}

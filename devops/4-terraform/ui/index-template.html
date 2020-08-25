@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<script>
+			function makeOath() {
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function () {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById(
+							"response"
+						).innerHTML = "Response: " + this.responseText;
+					}
+				};
+				xhttp.open(
+					"GET",
+					"GONDOL_URL/oath?name="+document.getElementById(
+							"hero_name"
+						).value,
+					true
+				);
+				xhttp.setRequestHeader('Content-type', 'text/plain; charset=utf-8')
+				xhttp.send();
+			}
+		</script>
+	</head>
+	<body style="background-color: #5a6959;">
+		<div align="center">
+			<br />
+			<img
+				src="https://mszg-gondol-ui.s3.eu-central-1.amazonaws.com/img/frodo.jpg"
+			/>
+			<br />
+			<br />
+			<br />
+			<h1>Who should take an oath?</h1>
+			<br />
+			<label for="hero_name">Hero name: </label>
+			<input type="text" id="hero_name" name="hero_name" />
+			<button onclick="makeOath()">Send</button>
+			<br />
+			<h2><span id="response"></span></h2>
+		</div>
+	</body>
+</html>
