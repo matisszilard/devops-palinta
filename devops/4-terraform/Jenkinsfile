@@ -15,7 +15,7 @@ pipeline {
                 label 'terraform'
             }
             steps {
-                sh 'cd ./devops/4-terraform; make up'
+                sh 'cd ./devops/4-terraform; terraform init; make up'
             }
         }
     }
