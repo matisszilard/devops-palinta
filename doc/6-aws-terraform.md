@@ -36,6 +36,4 @@ Example: https://github.com/terraform-providers/terraform-provider-aws/tree/mast
 
 Host the website created in step 3 on EC2.
 
-## Step 4: Optional: Deploy site on Amplify
-
-## Step 5: Have a :beer:, have a kitkat! :tada:
+## Step 4: Have a :beer:, have a kitkat! :tada:
