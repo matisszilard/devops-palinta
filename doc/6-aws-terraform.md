@@ -14,7 +14,7 @@ https://learn.hashicorp.com/tutorials/terraform/lambda-api-gateway
 
 ## Step 3: Create a demo app on AWS using Terraform
 
-Requirements:
+**Requirements**
 
 - Have at least 1 public lambda function
 - Have at least 1 private lambda function
