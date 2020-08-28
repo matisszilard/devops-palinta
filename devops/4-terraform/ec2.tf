@@ -65,8 +65,12 @@ resource "aws_instance" "gondol" {
   key_name      = aws_key_pair.gondol.key_name
   ami           = "ami-0c115dbd34c69a004"
   instance_type = "t2.micro"
-  vpc_security_group_ids = ["sg-07ff95d725c1c17a2"]
-  subnet_id              = "subnet-03d07b29a9f559d89"
+#   vpc_security_group_ids = ["sg-07ff95d725c1c17a2"]
+#   subnet_id              = "subnet-03d07b29a9f559d89"
+
+  vpc_security_group_ids = [aws_security_group.default.id]
+  subnet_id              = aws_subnet.default.id
+
   iam_instance_profile = "fozocske-allow-s3"
 
  connection {
