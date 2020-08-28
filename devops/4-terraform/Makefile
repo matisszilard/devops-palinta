@@ -49,7 +49,7 @@ test-ui:
 
 # Build and deploy lambdas
 
-build-lb: build-hero deploy-oath
+build-lb: build-hero build-oath
 
 build-oath:
 	cd lambda/oath; GOOS=linux go build -o ../../build/main main.go; cd ../..
