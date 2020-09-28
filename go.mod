@@ -15,6 +15,6 @@ require (
 	github.com/matisszilard/devops-palinta/devops/4-terraform/lambda/oath v0.0.0-20200825062042-7236909b6e6d // indirect
 	github.com/olivere/elastic/v7 v7.0.19
 	github.com/prometheus/client_golang v1.0.0
-	github.com/sirupsen/logrus v1.6.0
+	github.com/sirupsen/logrus v1.7.0
 	gopkg.in/sohlich/elogrus.v7 v7.0.0
 )
