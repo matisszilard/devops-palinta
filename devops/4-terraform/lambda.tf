@@ -136,7 +136,7 @@ resource "aws_api_gateway_integration" "lambda" {
 // TODO test if it is required
 module "apigateway-cors" {
   source  = "mewa/apigateway-cors/aws"
-  version = "2.0.0"
+  version = "2.0.1"
 
   api = aws_api_gateway_rest_api.oath.id
   resource = aws_api_gateway_resource.oath.id
