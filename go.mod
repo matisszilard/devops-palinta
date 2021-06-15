@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-lambda-go v1.19.1
 	github.com/aws/aws-sdk-go v1.33.5
 	github.com/bshuster-repo/logrus-logstash-hook v1.0.0
-	github.com/eclipse/paho.mqtt.golang v1.2.0
+	github.com/eclipse/paho.mqtt.golang v1.3.5
 	github.com/gin-gonic/gin v1.6.3 // indirect
 	github.com/go-kit/kit v0.8.0
 	github.com/influxdata/influxdb v1.8.2
