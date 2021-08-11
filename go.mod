@@ -5,7 +5,7 @@ go 1.13
 require (
 	github.com/VividCortex/gohistogram v1.0.0 // indirect
 	github.com/aws/aws-lambda-go v1.24.0
-	github.com/aws/aws-sdk-go v1.33.5
+	github.com/aws/aws-sdk-go v1.40.19
 	github.com/bshuster-repo/logrus-logstash-hook v1.0.0
 	github.com/eclipse/paho.mqtt.golang v1.2.0
 	github.com/gin-gonic/gin v1.6.3 // indirect
