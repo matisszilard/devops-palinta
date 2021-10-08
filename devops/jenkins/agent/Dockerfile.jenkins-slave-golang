@@ -1,4 +1,4 @@
-FROM golang:1.15.2
+FROM golang:1.17.2
 
 LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols"
 
